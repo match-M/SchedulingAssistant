@@ -13,8 +13,13 @@ public class OpenScreenAnimationActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_open_screen_animation);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
         try {
-            Thread.sleep(3000);
+            Thread.sleep(1500);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
