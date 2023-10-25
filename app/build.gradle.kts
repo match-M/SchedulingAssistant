@@ -29,8 +29,8 @@ android {
 }
 
 dependencies {
-
     implementation("com.google.android.material:material:1.5.0")
+    //noinspection GradleCompatible
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation(files("libs\\SchedulingAssistantModel.jar"))
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")

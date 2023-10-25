@@ -6,13 +6,14 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.match.schedulingassistant.R;
+import com.match.schedulingassistant.permission.Permission;
 
 public class OpenScreenAnimationActivity extends Activity {
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_open_screen_animation);
+
     }
 
     @Override
@@ -23,7 +24,6 @@ public class OpenScreenAnimationActivity extends Activity {
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
-
         startActivity(new Intent(OpenScreenAnimationActivity.this, StartActivity.class));
     }
 }
