@@ -16,7 +16,7 @@
         android:id="@+id/scheduling_file_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/title" />
+        android:layout_below="@id/title"/>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/new_scheduling_file_fab"
@@ -29,7 +29,6 @@
         android:layout_marginEnd="50dp"
         android:layout_marginBottom="50dp"
         android:src="@mipmap/add_file_ic_foreground"
-        android:backgroundTint="@color/white"
         android:contentDescription="@string/new_scheduling" />
 
 

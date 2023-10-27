@@ -1,14 +1,19 @@
 package com.match.schedulingassistant.activity;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.view.View;
+import android.widget.Toast;
+
+import androidx.fragment.app.DialogFragment;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.match.schedulingassistant.R;
 import com.match.schedulingassistant.api.presenter.IStartPresenter;
+import com.match.schedulingassistant.dialog.CreateSchedulingFileDialog;
 import com.match.schedulingassistant.file.FileBasicOperations;
 import com.match.schedulingassistant.file.SchedulingFileResolver;
 import com.match.schedulingassistant.permission.Permission;
@@ -20,7 +25,7 @@ public class StartActivity extends Activity implements IStartView, View.OnClickL
     private FloatingActionButton addSchedulingFile;
 
     private IStartPresenter startPresenter;
-    private ArrayAdapter<String> fileLists;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,18 +45,24 @@ public class StartActivity extends Activity implements IStartView, View.OnClickL
 
     }
 
-
-
     /**
-     * 新建排班文件
-     *
-     * @param fileName 排班文件名字
+     * 添加排班文件
+     * @param result ture-创建成功， false-创建失败
      */
     @Override
-    public void newSchedulingFile(String fileName) {
-        //this.fileResolver.open(fileName); //打开文件
-    }
+    public void addSchedulingFile(boolean result) {
+        this.startPresenter.getSchedulingFileList(); //更新文件列表
+        if(result){
+            Toast.makeText(StartActivity.this, this.getString(R.string.create_success)
+                    , Toast.LENGTH_SHORT).show();
+            //跳转到设置页
+            this.startActivity(new Intent(StartActivity.this, RuleSettingActivity.class));
+            return;
+        }
+        Toast.makeText(StartActivity.this,  this.getString(R.string.create_fail)
+                , Toast.LENGTH_SHORT).show();
 
+    }
 
     /**
      * 更新排班文件列表
@@ -59,7 +70,6 @@ public class StartActivity extends Activity implements IStartView, View.OnClickL
      */
     @Override
     public void updateSchedulingFileList(ArrayAdapter<String> arrayAdapter) {
-        this.fileLists = arrayAdapter;
         this.schedulingFiles.setAdapter(arrayAdapter);
     }
 
@@ -67,7 +77,9 @@ public class StartActivity extends Activity implements IStartView, View.OnClickL
     public void onClick(View view) {
         //根据id来判断
         if(view.getId() == R.id.new_scheduling_file_fab){
-
+            //打开对话框
+            new CreateSchedulingFileDialog()
+                    .inputFileNameDialog(this, this.startPresenter).show();
         }
     }
 }

@@ -10,11 +10,10 @@ import java.util.List;
 public interface IStartView {
 
     /**
-     * 新建排班文件
-     * @param fileName 排班文件名字
+     * 添加排班文件
+     * @param result ture-创建成功， false-创建失败
      */
-    void newSchedulingFile(String fileName);
-
+    void addSchedulingFile(boolean result);
 
     /**
      * 更新排班文件列表

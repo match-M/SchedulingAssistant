@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.RuleSettingActivity"
+    android:scrollbars="none">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Toolbar
+            android:id="@+id/title"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:title="@string/set_new_scheduling_rule"
+            android:titleTextColor="@color/black"
+            tools:ignore="MissingConstraints"/>
+
+        <RadioGroup
+            android:id="@+id/radio_group"
+            android:layout_below="@id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <RadioButton
+                android:id="@+id/use_save_rule"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/use_save_rule_file"/>
+
+            <LinearLayout
+                android:id="@+id/use_save_rule_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <Button
+                    android:id="@+id/select_file_btn"
+                    android:text="@string/select_rule"
+                    style="@style/rule_layout_button"/>
+
+            </LinearLayout>
+
+            <RadioButton
+                android:id="@+id/create_rule"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/create_new_rule" />
+
+            <LinearLayout
+                android:id="@+id/create_rule_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <!---早读检查规则设置-->
+
+                <Button
+                    android:id="@+id/morning_days_btn"
+                    android:text="@string/morning_days"
+                    style="@style/rule_layout_button"/>
+
+                <Button
+                    android:id="@+id/morning_floor_btn"
+                    android:text="@string/morning_floor"
+                    style="@style/rule_layout_button"/>
+
+                <Button
+                    android:id="@+id/morning_people_btn"
+                    android:text="@string/morning_people"
+                    style="@style/rule_layout_button"/>
+
+                <Button
+                    android:id="@+id/morning_start_position_btn"
+                    android:text="@string/morning_start_position"
+                    style="@style/rule_layout_button"/>
+
+                <ImageView
+                    style="@style/rule_layout_view"/>
+
+                <!---下午四节检查规则设置-->
+
+                <Button
+                    android:id="@+id/afternoon_days_btn"
+                    android:text="@string/afternoon_days"
+                    style="@style/rule_layout_button"/>
+
+                <Button
+                    android:id="@+id/afternoon_floor_btn"
+                    android:text="@string/afternoon_floor"
+                    style="@style/rule_layout_button"/>
+
+                <Button
+                    android:id="@+id/afternoon_people_btn"
+                    android:text="@string/afternoon_people"
+                    style="@style/rule_layout_button"/>
+
+                <Button
+                    android:id="@+id/afternoon_start_position_btn"
+                    android:text="@string/afternoon_start_position"
+                    style="@style/rule_layout_button"/>
+
+                <ImageView
+                    style="@style/rule_layout_view"/>
+
+                <!---晚自习检查规则设置-->
+
+                <Button
+                    android:id="@+id/night_days_btn"
+                    android:text="@string/night_days"
+                    style="@style/rule_layout_button"/>
+
+                <Button
+                    android:id="@+id/night_floor_btn"
+                    android:text="@string/night_floor"
+                    style="@style/rule_layout_button"/>
+
+                <Button
+                    android:id="@+id/night_people_btn"
+                    android:text="@string/night_people"
+                    style="@style/rule_layout_button"/>
+
+                <Button
+                    android:id="@+id/night_start_position_btn"
+                    android:text="@string/night_start_position"
+                    style="@style/rule_layout_button"/>
+
+                <ImageView
+                    style="@style/rule_layout_view"/>
+
+                <!---晚上第四节检查规则设置-->
+
+                <Button
+                    android:id="@+id/night_4_days_btn"
+                    android:text="@string/night_4_days"
+                    style="@style/rule_layout_button"/>
+
+                <Button
+                    android:id="@+id/night_4_floor_btn"
+                    android:text="@string/night_4_floor"
+                    style="@style/rule_layout_button"/>
+
+                <Button
+                    android:id="@+id/night_4_people_btn"
+                    android:text="@string/night_4_people"
+                    style="@style/rule_layout_button"/>
+
+                <Button
+                    android:id="@+id/night_4_start_position_btn"
+                    android:text="@string/night_4_start_position"
+                    style="@style/rule_layout_button"/>
+
+            </LinearLayout>
+
+            <!---其他设置-->
+
+            <ImageView
+                style="@style/rule_layout_view"/>
+
+            <Button
+                android:id="@+id/not_more_than_btn"
+                android:layout_marginBottom="10sp"
+                android:text="@string/not_more_than"
+                style="@style/rule_layout_button"/>
+
+        </RadioGroup>
+    </RelativeLayout>
+
+
+
+
+
+</ScrollView>
