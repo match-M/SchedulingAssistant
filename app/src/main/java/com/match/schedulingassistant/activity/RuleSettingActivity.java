@@ -5,10 +5,12 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.Toast;
 
 import com.match.schedulingassistant.R;
+import com.match.schedulingassistant.presenter.RuleSettingPresenter;
 
 public class RuleSettingActivity extends Activity implements View.OnClickListener {
 
@@ -36,13 +38,24 @@ public class RuleSettingActivity extends Activity implements View.OnClickListene
 
     private Button notMoreThanBtn;
 
+    private Button finishBtn;
+    private Button cancelBtn;
+
     private RadioButton useSaveRule;
     private RadioButton createRule;
 
+    private LinearLayout useSaveRuleLayout;
+    private LinearLayout createRuleLayout;
+
+    private RuleSettingPresenter ruleSettingPresenter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rule_setting);
+
+        //初始化
+
+        this.ruleSettingPresenter = new RuleSettingPresenter(RuleSettingActivity.this);
 
         //绑定按钮
         this.selectFileBtn = findViewById(R.id.select_file_btn);
@@ -69,10 +82,21 @@ public class RuleSettingActivity extends Activity implements View.OnClickListene
 
         this.notMoreThanBtn = findViewById(R.id.not_more_than_btn);
 
+        this.finishBtn = findViewById(R.id.finish_btn);
+        this.cancelBtn = findViewById(R.id.cancel_btn);
+
         this.useSaveRule = findViewById(R.id.use_save_rule);
         this.createRule = findViewById(R.id.create_rule);
 
+        //绑定布局
+        this.useSaveRuleLayout = findViewById(R.id.use_save_rule_layout);
+        this.createRuleLayout = findViewById(R.id.create_rule_layout);
+
         //绑定事件
+
+        this.useSaveRule.setOnClickListener(this);
+        this.cancelBtn.setOnClickListener(this);
+
         this.selectFileBtn.setOnClickListener(this);
 
         this.morningDaysBtn.setOnClickListener(this);
@@ -97,13 +121,28 @@ public class RuleSettingActivity extends Activity implements View.OnClickListene
 
         this.notMoreThanBtn.setOnClickListener(this);
 
+
+        this.finishBtn.setOnClickListener(this);
+        this.cancelBtn.setOnClickListener(this);
+
+        //设置页面不可点击
+        this.useSaveRuleLayout.setClickable(false);
+        this.createRuleLayout.setClickable(false);
+
+
     }
 
     @Override
     public void onClick(View view) {
         int id = view.getId();
+        if(id == R.id.use_save_rule) this.useSaveRuleLayout.setClickable(true);
 
-        
+        if(id == R.id.create_rule) this.createRuleLayout.setClickable(true);
+
+        if(id == R.id.morning_floor_btn || id == R.id.afternoon_floor_btn ||
+                id == R.id.night_floor_btn || id == R.id.night_4_floor_btn){
+            this.ruleSettingPresenter.setFloor(id, view);
+        }
 
     }
 }

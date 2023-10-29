@@ -6,6 +6,7 @@ import android.widget.ArrayAdapter;
 
 import com.match.schedulingassistant.activity.RuleSettingActivity;
 import com.match.schedulingassistant.activity.StartActivity;
+import com.match.schedulingassistant.adapter.list.SchedulingFileListAdapter;
 import com.match.schedulingassistant.api.presenter.IStartPresenter;
 import com.match.schedulingassistant.api.view.IStartView;
 import com.match.schedulingassistant.file.FileBasicOperations;
@@ -31,6 +32,9 @@ public class StartPresenter implements IStartPresenter {
         this.fileResolver = new SchedulingFileResolver();
         this._path = startActivity.getFilesDir().getAbsolutePath();
         this.fileBasicOperations = new FileBasicOperations(_path);
+
+        //设置文件路径
+        this.fileResolver.setFileDirPath(_path + "/");
     }
 
     /**
@@ -39,27 +43,33 @@ public class StartPresenter implements IStartPresenter {
     @Override
     public void getSchedulingFileList() {
         this.allFileName = this.fileBasicOperations.getAllFileName();
-        this.iStartView.updateSchedulingFileList( new ArrayAdapter<String>(startActivity,
-                android.R.layout.simple_list_item_1,
-                this.fileBasicOperations.getAllFileName().toArray(new String[0])));
+        this.iStartView.updateSchedulingFileList( new SchedulingFileListAdapter<String>(startActivity,
+                StartPresenter.this, this.fileBasicOperations.getAllFileName()));
     }
 
     /**
-     * 添加新的排班文件
+     * 执行添加操作
      *
      * @param fileName 文件的名字
      */
     @Override
-    public void addSchedulingFile(String fileName) {
-        //判断是否存在文件
+    public void doAdd(String fileName) {
         boolean result = this.allFileName.contains(fileName);
         //不存在才能创建
-        if(!result) {
-            this.fileResolver = new SchedulingFileResolver(fileName);
-            this.fileResolver.setFileDirPath(_path + "/");
-            this.fileResolver.open(null);
-        }
-        startActivity.addSchedulingFile(!result);
+        if(!result) this.fileResolver.open(fileName);
 
+        startActivity.addSchedulingFile(!result);
     }
+
+    /**
+     * 执行删除操作
+     *
+     * @param fileName 要删除文件的名字
+     */
+    @Override
+    public void doDelete(String fileName) {
+        boolean isDelete = this.fileResolver.delete(fileName);
+        startActivity.deleteSchedulingFile(isDelete);
+    }
+
 }

@@ -3,19 +3,15 @@ package com.match.schedulingassistant.activity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.view.View;
 import android.widget.Toast;
 
-import androidx.fragment.app.DialogFragment;
-
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.match.schedulingassistant.R;
+import com.match.schedulingassistant.adapter.list.SchedulingFileListAdapter;
 import com.match.schedulingassistant.api.presenter.IStartPresenter;
 import com.match.schedulingassistant.dialog.CreateSchedulingFileDialog;
-import com.match.schedulingassistant.file.FileBasicOperations;
-import com.match.schedulingassistant.file.SchedulingFileResolver;
 import com.match.schedulingassistant.permission.Permission;
 import com.match.schedulingassistant.api.view.IStartView;
 import com.match.schedulingassistant.presenter.StartPresenter;
@@ -43,6 +39,7 @@ public class StartActivity extends Activity implements IStartView, View.OnClickL
         //获取历史排班文件
         this.startPresenter.getSchedulingFileList();
 
+
     }
 
     /**
@@ -66,13 +63,27 @@ public class StartActivity extends Activity implements IStartView, View.OnClickL
 
     /**
      * 更新排班文件列表
-     * @param arrayAdapter listview适配器
+     * @param stringSchedulingFileListAdapter listview适配器
      */
     @Override
-    public void updateSchedulingFileList(ArrayAdapter<String> arrayAdapter) {
-        this.schedulingFiles.setAdapter(arrayAdapter);
+    public void updateSchedulingFileList(SchedulingFileListAdapter<String> stringSchedulingFileListAdapter) {
+        this.schedulingFiles.setAdapter(stringSchedulingFileListAdapter);
+
     }
 
+    /**
+     * 删除排班文件
+     * @param isDelete true - 删除成功, false - 删除失败
+     */
+    @Override
+    public void deleteSchedulingFile(boolean isDelete) {
+        startPresenter.getSchedulingFileList();
+        String deleteResult = this.getString(R.string.delete_fail);
+        if(isDelete) deleteResult = this.getString(R.string.delete_success);
+        Toast.makeText(StartActivity.this, deleteResult, Toast.LENGTH_SHORT).show();
+    }
+
+    //点击事件
     @Override
     public void onClick(View view) {
         //根据id来判断
@@ -82,4 +93,6 @@ public class StartActivity extends Activity implements IStartView, View.OnClickL
                     .inputFileNameDialog(this, this.startPresenter).show();
         }
     }
+
+
 }

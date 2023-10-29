@@ -30,7 +30,7 @@ public class CreateSchedulingFileDialog  {
             public void onClick(DialogInterface dialogInterface, int id) {
                 String fileName = String.valueOf(fileName_et.getText());
                 if(fileName.trim().length() == 0) return;
-                startPresenter.addSchedulingFile(fileName);
+                startPresenter.doAdd(fileName);
             }
         });
         alertDialog.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener(){

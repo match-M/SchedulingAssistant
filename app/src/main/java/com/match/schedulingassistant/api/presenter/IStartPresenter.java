@@ -11,9 +11,15 @@ public interface IStartPresenter {
     void getSchedulingFileList();
 
     /**
-     * 添加新的排班文件
+     * 执行添加操作
      * @param fileName 文件的名字
      */
-    void addSchedulingFile(String fileName);
+    void doAdd(String fileName);
+
+    /**
+     * 执行删除操作
+     * @param fileName 要删除文件的名字
+     */
+    void doDelete(String fileName);
 
 }

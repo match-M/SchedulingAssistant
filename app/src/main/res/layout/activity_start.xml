@@ -4,18 +4,23 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.StartActivity">
+    tools:context=".activity.StartActivity"
+    android:background="#F0F8FF">
 
     <Toolbar
         android:id="@+id/title"
         android:title="@string/created_scheduling"
+        android:titleTextColor="@color/black"
         android:layout_width="match_parent"
-        android:layout_height="55sp"/>
+        android:layout_height="55sp"
+        android:background="@color/white"/>
 
     <ListView
         android:id="@+id/scheduling_file_list"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:divider="@null"
+        android:listSelector="@android:color/transparent"
         android:layout_below="@id/title"/>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton

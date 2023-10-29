@@ -167,6 +167,24 @@
                 style="@style/rule_layout_button"/>
 
         </RadioGroup>
+
+        <Button
+            android:id="@+id/finish_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_below="@id/radio_group"
+            android:layout_marginTop="15sp"
+            android:layout_marginStart="20sp"
+            android:text="@string/finish"/>
+
+        <Button
+            android:id="@+id/cancel_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15sp"
+            android:layout_below="@id/radio_group"
+            android:layout_toEndOf="@id/finish_btn"
+            android:text="@string/cancel"/>
     </RelativeLayout>
 
 

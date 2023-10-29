@@ -12,7 +12,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Pattern;
 
-public class SettingFileResolver extends FileOperationAdapter implements SettingFile{
+public class SettingFileResolverForAndroid extends FileOperationAdapter implements SettingFile{
 
     private String fileName;
     private Context context;
@@ -21,7 +21,7 @@ public class SettingFileResolver extends FileOperationAdapter implements Setting
     private Pattern pattern;
 
 
-    public SettingFileResolver(String fileName, Context context){
+    public SettingFileResolverForAndroid(String fileName, Context context){
         this.context = context;
         this.fileName = fileName;
         this.settingInfos = new HashMap<>();
@@ -29,7 +29,7 @@ public class SettingFileResolver extends FileOperationAdapter implements Setting
 
     }
 
-    public SettingFileResolver(Context context){
+    public SettingFileResolverForAndroid(Context context){
         this.context = context;
         this.settingInfos = new HashMap<>();
         pattern = Pattern.compile("^[-\\+]?[\\d]*$"); //正则表达式
