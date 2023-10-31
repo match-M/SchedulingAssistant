@@ -30,11 +30,11 @@ public class StartPresenter implements IStartPresenter {
         this.iStartView = iStartView;
         this.startActivity = startActivity;
         this.fileResolver = new SchedulingFileResolver();
-        this._path = startActivity.getFilesDir().getAbsolutePath();
+        this._path = startActivity.getFilesDir().getAbsolutePath()+"/scheduling/";
         this.fileBasicOperations = new FileBasicOperations(_path);
 
         //设置文件路径
-        this.fileResolver.setFileDirPath(_path + "/");
+        this.fileResolver.setFileDirPath(_path);
     }
 
     /**

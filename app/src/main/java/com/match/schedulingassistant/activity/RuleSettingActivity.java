@@ -7,9 +7,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.match.schedulingassistant.R;
+import com.match.schedulingassistant.api.presenter.IRuleSettingPresenter;
 import com.match.schedulingassistant.presenter.RuleSettingPresenter;
 
 public class RuleSettingActivity extends Activity implements View.OnClickListener {
@@ -41,13 +43,11 @@ public class RuleSettingActivity extends Activity implements View.OnClickListene
     private Button finishBtn;
     private Button cancelBtn;
 
-    private RadioButton useSaveRule;
-    private RadioButton createRule;
+    private RadioButton saveFileBtn;
+    private RadioGroup saveFileBtnGroup;
 
-    private LinearLayout useSaveRuleLayout;
-    private LinearLayout createRuleLayout;
 
-    private RuleSettingPresenter ruleSettingPresenter;
+    private IRuleSettingPresenter ruleSettingPresenter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -85,16 +85,11 @@ public class RuleSettingActivity extends Activity implements View.OnClickListene
         this.finishBtn = findViewById(R.id.finish_btn);
         this.cancelBtn = findViewById(R.id.cancel_btn);
 
-        this.useSaveRule = findViewById(R.id.use_save_rule);
-        this.createRule = findViewById(R.id.create_rule);
+        this.saveFileBtnGroup = findViewById(R.id.save_file_btn_group);
+        this.saveFileBtn = findViewById(R.id.save_file_btn);
 
-        //绑定布局
-        this.useSaveRuleLayout = findViewById(R.id.use_save_rule_layout);
-        this.createRuleLayout = findViewById(R.id.create_rule_layout);
 
         //绑定事件
-
-        this.useSaveRule.setOnClickListener(this);
         this.cancelBtn.setOnClickListener(this);
 
         this.selectFileBtn.setOnClickListener(this);
@@ -125,24 +120,46 @@ public class RuleSettingActivity extends Activity implements View.OnClickListene
         this.finishBtn.setOnClickListener(this);
         this.cancelBtn.setOnClickListener(this);
 
-        //设置页面不可点击
-        this.useSaveRuleLayout.setClickable(false);
-        this.createRuleLayout.setClickable(false);
-
 
     }
 
     @Override
     public void onClick(View view) {
         int id = view.getId();
-        if(id == R.id.use_save_rule) this.useSaveRuleLayout.setClickable(true);
 
-        if(id == R.id.create_rule) this.createRuleLayout.setClickable(true);
-
-        if(id == R.id.morning_floor_btn || id == R.id.afternoon_floor_btn ||
-                id == R.id.night_floor_btn || id == R.id.night_4_floor_btn){
+        if (id == R.id.morning_floor_btn || id == R.id.afternoon_floor_btn ||
+                id == R.id.night_floor_btn || id == R.id.night_4_floor_btn) {
             this.ruleSettingPresenter.setFloor(id, view);
         }
+
+        if (id == R.id.morning_people_btn || id == R.id.afternoon_people_btn ||
+                id == R.id.night_people_btn || id == R.id.night_4_people_btn) {
+            this.ruleSettingPresenter.setPeople(id, view);
+        }
+
+        if (id == R.id.morning_days_btn || id == R.id.afternoon_days_btn ||
+                id == R.id.night_days_btn || id == R.id.night_4_days_btn) {
+            this.ruleSettingPresenter.setDays(id, view);
+        }
+
+        if (id == R.id.morning_start_position_btn || id == R.id.afternoon_start_position_btn ||
+                id == R.id.night_start_position_btn || id == R.id.night_4_start_position_btn) {
+            this.ruleSettingPresenter.setStartPosition(id, view);
+        }
+
+        if (id == R.id.not_more_than_btn) {
+            this.ruleSettingPresenter.setMaxAttendance(id, view);
+        }
+
+        if (id == R.id.select_file_btn){
+            this.ruleSettingPresenter.selectSaveRule();
+        }
+
+        if(saveFileBtnGroup.getCheckedRadioButtonId() == R.id.save_file_btn &&
+                id == R.id.finish_btn){
+            this.ruleSettingPresenter.doSave();
+        }
+
 
     }
 }

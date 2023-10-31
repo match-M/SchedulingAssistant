@@ -20,26 +20,29 @@ public interface IRuleSettingPresenter {
     /**
      * 设置人数
      * @param viewId 控件id
+     * @param view  控件
      */
-    void setPeople(int viewId);
+    void setPeople(int viewId, View view);
 
     /**
      * 设置天数
      * @param viewId 控件id
      */
-    void setDays(int viewId);
+    void setDays(int viewId, View view);
 
     /**
      * 设置开始日期
      * @param viewId 控件id
      */
-    void setStartPosition(int viewId);
+    void setStartPosition(int viewId, View view);
 
     /**
      * 设置最大出勤量
-     * @param attendance 出勤量
+     *
+     * @param view 控件
+     * @param viewId 控件id
      */
-    void setMaxAttendance(int attendance);
+    public void setMaxAttendance(int viewId, View view);
 
     /**
      * 保存规则
@@ -53,9 +56,14 @@ public interface IRuleSettingPresenter {
     void doSave(HashMap<String, Object> rules);
 
     /**
-     * 使用保存的规则
-     * @param ruleFileName 规则文件名字
+     * 选择保存的规则
+     *
      */
-    void useSaveRule(String ruleFileName);
+    public void selectSaveRule();
 
+    /**
+     * 打开文件
+     * @param fileName 文件名字
+     */
+    public void usingFile(String fileName);
 }
