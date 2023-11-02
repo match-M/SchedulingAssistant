@@ -10,6 +10,7 @@ import android.widget.Button;
 
 import com.match.schedulingassistant.R;
 import com.match.schedulingassistant.activity.RuleSettingActivity;
+import com.match.schedulingassistant.constant.Week;
 
 import java.util.HashMap;
 
@@ -18,7 +19,7 @@ import java.util.HashMap;
  * @author macth
  */
 public class SelectFloorDialog {
-    final String[] floor = new String[]{"1", "2", "3", "4", "5", "ALL"};
+    final String[] floor = Week.week.toArray(new String[0]);
     private ListDialog listDialog;
 
     public SelectFloorDialog(){

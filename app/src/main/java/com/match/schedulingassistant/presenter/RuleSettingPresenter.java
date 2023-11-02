@@ -1,12 +1,14 @@
 package com.match.schedulingassistant.presenter;
 
-import android.app.Activity;
 import android.view.View;
 import android.widget.Button;
 
 import com.match.schedulingassistant.activity.RuleSettingActivity;
 import com.match.schedulingassistant.api.presenter.IRuleSettingPresenter;
+import com.match.schedulingassistant.api.view.IRuleSettingView;
 import com.match.schedulingassistant.constant.IdAndRuleName;
+import com.match.schedulingassistant.constant.RuleName;
+import com.match.schedulingassistant.constant.Week;
 import com.match.schedulingassistant.dialog.SelectDaysDialog;
 import com.match.schedulingassistant.dialog.SelectFloorDialog;
 import com.match.schedulingassistant.dialog.SelectMaxAttendanceDialog;
@@ -15,20 +17,21 @@ import com.match.schedulingassistant.dialog.SelectSaveRuleFileDialog;
 import com.match.schedulingassistant.dialog.SelectStartPositionDialog;
 import com.match.schedulingassistant.exception.NotInitException;
 import com.match.schedulingassistant.file.FileBasicOperations;
+import com.match.schedulingassistant.file.FileInfo;
 import com.match.schedulingassistant.file.SettingFileResolver;
 
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Set;
 
 /**
  * @author match
  */
-public class RuleSettingPresenter extends Activity implements IRuleSettingPresenter {
+public class RuleSettingPresenter implements IRuleSettingPresenter {
 
     private final String _path;
     private SettingFileResolver settingFileResolver;
     private RuleSettingActivity ruleSettingActivity;
+    private IRuleSettingView iRuleSettingView;
     private SelectFloorDialog selectFloorDialog;
     private SelectPeopleDialog selectPeopleDialog;
     private SelectDaysDialog selectDaysDialog;
@@ -38,8 +41,10 @@ public class RuleSettingPresenter extends Activity implements IRuleSettingPresen
     private FileBasicOperations fileBasicOperations;
     private HashMap<String, Object> rules;
 
-    public RuleSettingPresenter(RuleSettingActivity ruleSettingActivity){
+    public RuleSettingPresenter(RuleSettingActivity ruleSettingActivity,
+                                IRuleSettingView iRuleSettingView){
         this.rules = new HashMap<>();
+        this.iRuleSettingView = iRuleSettingView;
         this.ruleSettingActivity = ruleSettingActivity;
         this.settingFileResolver = new SettingFileResolver();
         this._path = ruleSettingActivity.getFilesDir().getAbsolutePath()+"/setting/";
@@ -128,14 +133,15 @@ public class RuleSettingPresenter extends Activity implements IRuleSettingPresen
      * 保存规则
      */
     @Override
-    public void doSave() {
-        this.settingFileResolver.open("test");
+    public void doSave(){
+        this.settingFileResolver.open(new FileInfo().getFileName());
         try {
             this.settingFileResolver.addSetting(this.rules);
         } catch (NotInitException e) {
             throw new RuntimeException(e);
         }
         this.settingFileResolver.writer();
+        this.iRuleSettingView.goNext();
     }
 
     /**
@@ -145,7 +151,8 @@ public class RuleSettingPresenter extends Activity implements IRuleSettingPresen
      */
     @Override
     public void doSave(HashMap<String, Object> rules) {
-
+        this.rules = rules;
+        doSave();
     }
 
     /**
@@ -167,11 +174,11 @@ public class RuleSettingPresenter extends Activity implements IRuleSettingPresen
      */
     @Override
     public void usingFile(String fileName) {
-        System.out.println(fileName);
-        System.out.println("usingFile");
         int id;
+        Object value;
         Button button;
         String buttonText;
+        //防止出现null错误
         if(fileName == null) return;
         this.settingFileResolver.open(fileName);
         //获取规则
@@ -180,6 +187,8 @@ public class RuleSettingPresenter extends Activity implements IRuleSettingPresen
         //遍历规则集合
         for (String key : setKey) {
             id = IdAndRuleName.getButtonId(key);
+            //找不到控件的情况
+            if(id == 404) continue;
             //根据id找到对应的button控件
             button = this.ruleSettingActivity.findViewById(id);
             //获取控件上的文本
@@ -187,8 +196,20 @@ public class RuleSettingPresenter extends Activity implements IRuleSettingPresen
             //判断之前是否显示过数据
             if(buttonText.contains(":"))
                 buttonText = buttonText.substring(0, buttonText.indexOf(":"));
+            //获取RuleValue
+            value = this.rules.get(key);
+            //判断是否为空
+            if(value == null) continue;
+            //把开始位置采用日期的方式输出
+            if(key.equals(RuleName.MORNING_START_POSITION) ||
+                    key.equals(RuleName.AFTERNOON_START_POSITION) ||
+                    key.equals(RuleName.NIGHT_START_POSITION) ||
+                    key.equals(RuleName.NIGHT_4_START_POSITION)){
+
+                value = Week.week.get((Integer) value);
+            }
             //根据id来显示保存的规则数据, id与ruleName一一对应， ruleName与ruleValue一一对应
-            buttonText = buttonText+":"+this.rules.get(key);
+            buttonText = buttonText+":"+value;
             //重新设置文本
             button.setText(buttonText);
         }

@@ -35,17 +35,12 @@ public class SelectSaveRuleFileDialog {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
                     fileName = fileList[i];
-                    System.out.println(fileList[i]);
-                    ruleSettingPresenter.usingFile(fileList[i]);
+                    ruleSettingPresenter.usingFile(fileName);
                 }
             });
         }
 
         if(fileList.length == 0 ){
-            /*TextView textView = new TextView(activity);
-            textView.setText("没有文件哦~");
-            textView.setGravity(Gravity.CENTER_HORIZONTAL);
-            alertDialog.setView(textView);*/
             alertDialog.setMessage("没有文件哦~");
         }
 

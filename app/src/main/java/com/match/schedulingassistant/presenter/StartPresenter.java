@@ -10,6 +10,7 @@ import com.match.schedulingassistant.adapter.list.SchedulingFileListAdapter;
 import com.match.schedulingassistant.api.presenter.IStartPresenter;
 import com.match.schedulingassistant.api.view.IStartView;
 import com.match.schedulingassistant.file.FileBasicOperations;
+import com.match.schedulingassistant.file.FileInfo;
 import com.match.schedulingassistant.file.SchedulingFileResolver;
 
 import java.lang.reflect.Array;
@@ -57,7 +58,7 @@ public class StartPresenter implements IStartPresenter {
         boolean result = this.allFileName.contains(fileName);
         //不存在才能创建
         if(!result) this.fileResolver.open(fileName);
-
+        new FileInfo().setFileName(fileName);
         startActivity.addSchedulingFile(!result);
     }
 

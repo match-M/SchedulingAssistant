@@ -33,4 +33,9 @@
     <string name="delete_success">删除成功</string>
     <string name="delete_fail">删除失败</string>
     <string name="save_change">保存当前更改</string>
+    <string name="next">下一个</string>
+    <string name="add_people">添加成员</string>
+    <string name="add">添加</string>
+    <string name="add_success">添加成功</string>
+    <string name="add_fail">添加失败</string>
 </resources>

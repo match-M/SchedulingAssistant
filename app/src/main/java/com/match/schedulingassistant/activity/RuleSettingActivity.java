@@ -2,6 +2,7 @@ package com.match.schedulingassistant.activity;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -12,9 +13,10 @@ import android.widget.Toast;
 
 import com.match.schedulingassistant.R;
 import com.match.schedulingassistant.api.presenter.IRuleSettingPresenter;
+import com.match.schedulingassistant.api.view.IRuleSettingView;
 import com.match.schedulingassistant.presenter.RuleSettingPresenter;
 
-public class RuleSettingActivity extends Activity implements View.OnClickListener {
+public class RuleSettingActivity extends Activity implements View.OnClickListener, IRuleSettingView {
 
 
     private Button selectFileBtn;
@@ -40,7 +42,7 @@ public class RuleSettingActivity extends Activity implements View.OnClickListene
 
     private Button notMoreThanBtn;
 
-    private Button finishBtn;
+    private Button nextBtn;
     private Button cancelBtn;
 
     private RadioButton saveFileBtn;
@@ -55,7 +57,8 @@ public class RuleSettingActivity extends Activity implements View.OnClickListene
 
         //初始化
 
-        this.ruleSettingPresenter = new RuleSettingPresenter(RuleSettingActivity.this);
+        this.ruleSettingPresenter = new RuleSettingPresenter(RuleSettingActivity.this,
+                RuleSettingActivity.this);
 
         //绑定按钮
         this.selectFileBtn = findViewById(R.id.select_file_btn);
@@ -82,7 +85,7 @@ public class RuleSettingActivity extends Activity implements View.OnClickListene
 
         this.notMoreThanBtn = findViewById(R.id.not_more_than_btn);
 
-        this.finishBtn = findViewById(R.id.finish_btn);
+        this.nextBtn = findViewById(R.id.next_btn);
         this.cancelBtn = findViewById(R.id.cancel_btn);
 
         this.saveFileBtnGroup = findViewById(R.id.save_file_btn_group);
@@ -117,49 +120,63 @@ public class RuleSettingActivity extends Activity implements View.OnClickListene
         this.notMoreThanBtn.setOnClickListener(this);
 
 
-        this.finishBtn.setOnClickListener(this);
+        this.nextBtn.setOnClickListener(this);
         this.cancelBtn.setOnClickListener(this);
+
+
+    }
+    //按钮点击事件
+    @Override
+    public void onClick(View view) {
+        int id = view.getId();
+        //设置各项检查的需要的楼层数
+        if (id == R.id.morning_floor_btn || id == R.id.afternoon_floor_btn ||
+                id == R.id.night_floor_btn || id == R.id.night_4_floor_btn) {
+            this.ruleSettingPresenter.setFloor(id, view);
+        }
+        //设置各项检查的人数
+        if (id == R.id.morning_people_btn || id == R.id.afternoon_people_btn ||
+                id == R.id.night_people_btn || id == R.id.night_4_people_btn) {
+            this.ruleSettingPresenter.setPeople(id, view);
+        }
+        //设置各项检查需要检查的天数
+        if (id == R.id.morning_days_btn || id == R.id.afternoon_days_btn ||
+                id == R.id.night_days_btn || id == R.id.night_4_days_btn) {
+            this.ruleSettingPresenter.setDays(id, view);
+        }
+        //设置各项检查的开始日期
+        if (id == R.id.morning_start_position_btn || id == R.id.afternoon_start_position_btn ||
+                id == R.id.night_start_position_btn || id == R.id.night_4_start_position_btn) {
+            this.ruleSettingPresenter.setStartPosition(id, view);
+        }
+        //设置一个人一天最多的班数
+        if (id == R.id.not_more_than_btn) {
+            this.ruleSettingPresenter.setMaxAttendance(id, view);
+        }
+        //使用已保存的规则
+        if (id == R.id.select_file_btn){
+            this.ruleSettingPresenter.selectSaveRule();
+        }
+        //勾选了保存选项并点击了下一步
+        if(saveFileBtnGroup.getCheckedRadioButtonId() == R.id.save_file_btn &&
+                id == R.id.next_btn){
+            this.ruleSettingPresenter.doSave();
+        }
+        //取消返回开始页面
+        if (id == R.id.cancel_btn){
+            startActivity(new Intent(RuleSettingActivity.this, StartActivity.class));
+        }
+        //单点击了下一步
+        if (id == R.id.next_btn){
+            this.goNext();
+        }
 
 
     }
 
     @Override
-    public void onClick(View view) {
-        int id = view.getId();
-
-        if (id == R.id.morning_floor_btn || id == R.id.afternoon_floor_btn ||
-                id == R.id.night_floor_btn || id == R.id.night_4_floor_btn) {
-            this.ruleSettingPresenter.setFloor(id, view);
-        }
-
-        if (id == R.id.morning_people_btn || id == R.id.afternoon_people_btn ||
-                id == R.id.night_people_btn || id == R.id.night_4_people_btn) {
-            this.ruleSettingPresenter.setPeople(id, view);
-        }
-
-        if (id == R.id.morning_days_btn || id == R.id.afternoon_days_btn ||
-                id == R.id.night_days_btn || id == R.id.night_4_days_btn) {
-            this.ruleSettingPresenter.setDays(id, view);
-        }
-
-        if (id == R.id.morning_start_position_btn || id == R.id.afternoon_start_position_btn ||
-                id == R.id.night_start_position_btn || id == R.id.night_4_start_position_btn) {
-            this.ruleSettingPresenter.setStartPosition(id, view);
-        }
-
-        if (id == R.id.not_more_than_btn) {
-            this.ruleSettingPresenter.setMaxAttendance(id, view);
-        }
-
-        if (id == R.id.select_file_btn){
-            this.ruleSettingPresenter.selectSaveRule();
-        }
-
-        if(saveFileBtnGroup.getCheckedRadioButtonId() == R.id.save_file_btn &&
-                id == R.id.finish_btn){
-            this.ruleSettingPresenter.doSave();
-        }
-
-
+    public void goNext() {
+        startActivity(new Intent(RuleSettingActivity.this,
+                PersonnelSettingsActivity.class));
     }
 }

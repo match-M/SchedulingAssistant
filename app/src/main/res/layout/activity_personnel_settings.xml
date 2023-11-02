@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".activity.PersonnelSettingsActivity">
+
+    <Toolbar
+        android:id="@+id/title"
+        android:title="@string/add_people"
+        android:titleTextColor="@color/black"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fitsSystemWindows="true"/>
+    <LinearLayout
+        android:id="@+id/add_people_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <EditText
+            android:id="@+id/input_name"
+            android:layout_width="100dp"
+            android:layout_weight="1"
+            android:layout_marginTop="15sp"
+            android:layout_height="wrap_content"/>
+        <Button
+            android:id="@+id/add_btn"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10sp"
+            android:layout_marginBottom="10sp"
+            android:background="@drawable/button_background"
+            android:text="@string/add"/>
+        <Button
+            android:id="@+id/finish_btn"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10sp"
+            android:layout_marginStart="5sp"
+            android:layout_marginBottom="10sp"
+            android:layout_marginEnd="10sp"
+            android:background="@drawable/button_background"
+            android:text="@string/finish"/>
+    </LinearLayout>
+
+    <ListView
+        android:id="@+id/people_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="10sp"
+        android:divider="@null"/>
+
+
+
+
+</LinearLayout>
