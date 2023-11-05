@@ -1,6 +1,7 @@
 package com.match.schedulingassistant.activity;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -9,10 +10,13 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import androidx.appcompat.widget.Toolbar;
+
 import com.match.schedulingassistant.R;
 import com.match.schedulingassistant.api.presenter.IPersonnelSettingsPresenter;
 import com.match.schedulingassistant.api.view.IPersonnelSettingsView;
 import com.match.schedulingassistant.presenter.PersonnelSettingsPresenter;
+import com.match.schedulingassistant.presenter.RuleSettingPresenter;
 
 /**
  * 人员设置
@@ -24,6 +28,7 @@ public class PersonnelSettingsActivity extends Activity implements View.OnClickL
     private EditText addPeopleEt;
     private Button addPeopleBtn;
     private Button finishBtn;
+    private Button cancelBtn;
     private ListView peopleList;
     private IPersonnelSettingsPresenter iPersonnelSettingsPresenter;
 
@@ -37,17 +42,16 @@ public class PersonnelSettingsActivity extends Activity implements View.OnClickL
         addPeopleBtn = findViewById(R.id.add_btn);
         finishBtn = findViewById(R.id.finish_btn);
         peopleList = findViewById(R.id.people_list);
+        cancelBtn = findViewById(R.id.cancel_btn);
 
         //绑定监听事件
         addPeopleBtn.setOnClickListener(this);
         finishBtn.setOnClickListener(this);
+        cancelBtn.setOnClickListener(this);
 
         iPersonnelSettingsPresenter = new PersonnelSettingsPresenter(
                 PersonnelSettingsActivity.this,
                 PersonnelSettingsActivity.this);
-
-
-
     }
 
 
@@ -65,6 +69,9 @@ public class PersonnelSettingsActivity extends Activity implements View.OnClickL
 
         if(id == R.id.finish_btn){
             Toast.makeText(PersonnelSettingsActivity.this, "ok", Toast.LENGTH_SHORT).show();
+        }
+        if(id == R.id.cancel_btn){
+            this.cancel();
         }
     }
 
@@ -97,5 +104,13 @@ public class PersonnelSettingsActivity extends Activity implements View.OnClickL
     @Override
     public void finish(){
 
+    }
+
+    /**
+     * 取消
+     */
+    @Override
+    public void cancel() {
+        startActivity(new Intent(PersonnelSettingsActivity.this, RuleSettingActivity.class));
     }
 }

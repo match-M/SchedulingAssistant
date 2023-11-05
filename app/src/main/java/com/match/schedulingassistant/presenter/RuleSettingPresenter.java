@@ -18,6 +18,7 @@ import com.match.schedulingassistant.dialog.SelectStartPositionDialog;
 import com.match.schedulingassistant.exception.NotInitException;
 import com.match.schedulingassistant.file.FileBasicOperations;
 import com.match.schedulingassistant.file.FileInfo;
+import com.match.schedulingassistant.file.SchedulingFileResolver;
 import com.match.schedulingassistant.file.SettingFileResolver;
 
 import java.util.HashMap;
@@ -28,7 +29,7 @@ import java.util.Set;
  */
 public class RuleSettingPresenter implements IRuleSettingPresenter {
 
-    private final String _path;
+    private final String _basePath;
     private SettingFileResolver settingFileResolver;
     private RuleSettingActivity ruleSettingActivity;
     private IRuleSettingView iRuleSettingView;
@@ -47,8 +48,8 @@ public class RuleSettingPresenter implements IRuleSettingPresenter {
         this.iRuleSettingView = iRuleSettingView;
         this.ruleSettingActivity = ruleSettingActivity;
         this.settingFileResolver = new SettingFileResolver();
-        this._path = ruleSettingActivity.getFilesDir().getAbsolutePath()+"/setting/";
-        this.fileBasicOperations = new FileBasicOperations(_path);
+        this._basePath = ruleSettingActivity.getFilesDir().getAbsolutePath();
+        this.fileBasicOperations = new FileBasicOperations(_basePath+"/setting/");
 
         //初始化选择弹窗
         this.selectFloorDialog = new SelectFloorDialog();
@@ -58,7 +59,7 @@ public class RuleSettingPresenter implements IRuleSettingPresenter {
         this.selectMaxAttendanceDialog = new SelectMaxAttendanceDialog();
 
         //设置文件路径
-        this.settingFileResolver.setFileDirPath(_path);
+        this.settingFileResolver.setFileDirPath(_basePath+"/setting/");
     }
 
     /**
@@ -214,6 +215,18 @@ public class RuleSettingPresenter implements IRuleSettingPresenter {
             button.setText(buttonText);
         }
 
+    }
+
+    /**
+     * 执行取消操作
+     */
+    @Override
+    public void doCancel() {
+        String fileName = new FileInfo().getFileName();
+        SchedulingFileResolver deleteFile = new SchedulingFileResolver(fileName);
+        deleteFile.setFileDirPath(_basePath+"/scheduling/");
+        boolean isDelete = deleteFile.delete(null); //删除文件
+        this.iRuleSettingView.cancel(isDelete);
     }
 
 }

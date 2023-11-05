@@ -14,6 +14,8 @@ import android.widget.Toast;
 import com.match.schedulingassistant.R;
 import com.match.schedulingassistant.api.presenter.IRuleSettingPresenter;
 import com.match.schedulingassistant.api.view.IRuleSettingView;
+import com.match.schedulingassistant.file.FileInfo;
+import com.match.schedulingassistant.file.SchedulingFileResolver;
 import com.match.schedulingassistant.presenter.RuleSettingPresenter;
 
 public class RuleSettingActivity extends Activity implements View.OnClickListener, IRuleSettingView {
@@ -164,6 +166,7 @@ public class RuleSettingActivity extends Activity implements View.OnClickListene
         }
         //取消返回开始页面
         if (id == R.id.cancel_btn){
+            this.ruleSettingPresenter.doCancel();
             startActivity(new Intent(RuleSettingActivity.this, StartActivity.class));
         }
         //单点击了下一步
@@ -179,4 +182,17 @@ public class RuleSettingActivity extends Activity implements View.OnClickListene
         startActivity(new Intent(RuleSettingActivity.this,
                 PersonnelSettingsActivity.class));
     }
+
+    /**
+     * @param isDelete true-文件删除成功，false-文件删除失败
+     */
+    @Override
+    public void cancel(boolean isDelete) {
+        String result = "相关文件删除失败";
+        if(isDelete) result = "相关文件已为您删除";
+        Toast.makeText(RuleSettingActivity.this,
+                result, Toast.LENGTH_LONG).show();
+    }
+
+
 }

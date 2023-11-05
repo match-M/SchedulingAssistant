@@ -39,8 +39,8 @@ public class PersonnelSettingsPresenter implements IPersonnelSettingsPresenter {
     @Override
     public void doAdd(String name) {
         boolean isNotAdd = false;
-        //判断是否已经添加过了
-        if(!peoples.contains(name)){
+        //判断是否已经添加过了和名字是不是空
+        if(!peoples.contains(name) && !(name.trim().length() == 0)){
             this.scheduling.addPeople(name);
             this.peoples.add(name);
             this.upList();

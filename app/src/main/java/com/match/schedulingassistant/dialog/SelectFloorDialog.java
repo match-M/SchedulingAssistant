@@ -19,7 +19,7 @@ import java.util.HashMap;
  * @author macth
  */
 public class SelectFloorDialog {
-    final String[] floor = Week.week.toArray(new String[0]);
+    final String[] floor = {"1", "2", "3", "4", "5"};
     private ListDialog listDialog;
 
     public SelectFloorDialog(){

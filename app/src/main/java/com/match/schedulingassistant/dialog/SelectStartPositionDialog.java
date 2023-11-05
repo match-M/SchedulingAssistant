@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.match.schedulingassistant.R;
+import com.match.schedulingassistant.constant.Week;
 import com.match.schedulingassistant.dialog.ListDialog;
 
 import java.util.HashMap;
@@ -16,7 +17,7 @@ import java.util.HashMap;
  * @author match
  */
 public class SelectStartPositionDialog extends ListDialog{
-    public String[] date = new String[]{"星期天", "星期一", "星期二" , "星期三", "星期四", "星期五"};
+    public String[] date =  Week.week.toArray(new String[0]);
 
 
     @Override

@@ -24,4 +24,9 @@ public interface IPersonnelSettingsView {
      */
     void finish();
 
+    /**
+     * 取消
+     */
+    void cancel();
+
 }

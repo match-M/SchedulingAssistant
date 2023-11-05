@@ -65,5 +65,10 @@ public interface IRuleSettingPresenter {
      * 打开文件
      * @param fileName 文件名字
      */
-    public void usingFile(String fileName);
+    void usingFile(String fileName);
+
+    /**
+     * 执行取消操作
+     */
+    void doCancel();
 }
