@@ -165,6 +165,7 @@ public class RuleSettingPresenter implements IRuleSettingPresenter {
         this.selectSaveRuleFileDialog = new SelectSaveRuleFileDialog(
                 this.fileBasicOperations.getAllFileName().toArray(new String[0]),
                 RuleSettingPresenter.this);
+
         this.selectSaveRuleFileDialog.showSelectSaveRuleFileDialog(this.ruleSettingActivity);
     }
 

@@ -13,25 +13,21 @@ import com.match.schedulingassistant.api.presenter.IRuleSettingPresenter;
  * 选择已经保存的规则弹窗
  * @author match
  */
-public class SelectSaveRuleFileDialog {
+public class SelectSaveRuleFileDialog extends SelectFileDialog {
 
-    private String[] fileList;
 
     private String fileName;
     private IRuleSettingPresenter ruleSettingPresenter;
 
     public SelectSaveRuleFileDialog(String[] fileList, IRuleSettingPresenter ruleSettingPresenter){
-        this.fileList = fileList;
+        super(fileList);
         this.ruleSettingPresenter = ruleSettingPresenter;
     }
 
     public void showSelectSaveRuleFileDialog(Activity activity){
-
-        AlertDialog.Builder alertDialog = new AlertDialog.Builder(activity);
-        alertDialog.setTitle("请选择一个规则吧");
-
-        if(fileList.length > 0) {
-            alertDialog.setItems(this.fileList, new DialogInterface.OnClickListener() {
+        super.showSelectFileDialog(activity, "请选择一个规则吧");
+        if(super.fileList.length > 0) {
+            super.alertDialog.setItems(super.fileList, new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
                     fileName = fileList[i];
@@ -39,24 +35,10 @@ public class SelectSaveRuleFileDialog {
                 }
             });
         }
+        super.alertDialog.show();
 
-        if(fileList.length == 0 ){
-            alertDialog.setMessage("没有文件哦~");
-        }
 
-        alertDialog.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                fileName = "0";
-            }
-        });
 
-        alertDialog.show();
-
-    }
-
-    public String getFileName(){
-        return this.fileName;
     }
 
 }

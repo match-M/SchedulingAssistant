@@ -86,7 +86,7 @@ public class SchedulingFileListAdapter<E> extends BaseAdapter {
         //定义PopupMenu对象
         PopupMenu popupMenu = new PopupMenu(this.context, v);
         //设置PopupMenu对象的布局
-        popupMenu.getMenuInflater().inflate(R.menu.scheudling_file_list_item_menu, popupMenu.getMenu());
+        popupMenu.getMenuInflater().inflate(R.menu.list_item_menu, popupMenu.getMenu());
         //设置PopupMenu的点击事件
         popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
             @Override

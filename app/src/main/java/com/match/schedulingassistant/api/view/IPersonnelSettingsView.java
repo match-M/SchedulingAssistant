@@ -1,5 +1,6 @@
 package com.match.schedulingassistant.api.view;
 
+import android.view.View;
 import android.widget.ArrayAdapter;
 
 /**
@@ -18,6 +19,11 @@ public interface IPersonnelSettingsView {
      * @param arrayAdapter 列表数据
      */
     void upPeopleList(ArrayAdapter<String> arrayAdapter);
+
+    /**
+     * 显示长按菜单
+     */
+    void showPopupMenu(View view, int position);
 
     /**
      * 完成

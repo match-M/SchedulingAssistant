@@ -31,6 +31,17 @@
             android:id="@+id/add_btn"
             style="@style/personnel_settings_layout_button"
             android:text="@string/add"/>
+
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
         <Button
             android:id="@+id/finish_btn"
             style="@style/personnel_settings_layout_button"
@@ -42,8 +53,26 @@
             style="@style/personnel_settings_layout_button"
             android:text="@string/cancel"/>
 
+        <Button
+            android:id="@+id/select_save_file_btn"
+            style="@style/personnel_settings_layout_button"
+            android:text="@string/select_save_file"/>
+
 
     </LinearLayout>
+
+    <RadioGroup
+        android:id="@+id/radio_group"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content">
+        <RadioButton
+            android:id="@+id/save_member_btn"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:text="@string/save_member"/>
+
+    </RadioGroup>
+
 
     <ListView
         android:id="@+id/people_list"

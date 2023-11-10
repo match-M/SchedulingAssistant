@@ -38,4 +38,6 @@
     <string name="add">添加</string>
     <string name="add_success">添加成功</string>
     <string name="add_fail">添加失败</string>
+    <string name="save_member">保存当前成员</string>
+    <string name="select_save_file">选择已保存的文件</string>
 </resources>
