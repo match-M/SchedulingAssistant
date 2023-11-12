@@ -55,6 +55,7 @@ public class StartPresenter implements IStartPresenter {
      */
     @Override
     public void doAdd(String fileName) {
+        fileName = fileName.trim(); //去空格
         boolean result = this.allFileName.contains(fileName);
         //不存在才能创建
         if(!result) this.fileResolver.open(fileName);

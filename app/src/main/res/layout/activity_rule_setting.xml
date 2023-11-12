@@ -9,7 +9,6 @@
     tools:context=".activity.RuleSettingActivity"
     android:scrollbars="none">
 
-
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -34,22 +33,22 @@
             <Button
                 android:id="@+id/morning_days_btn"
                 android:text="@string/morning_days"
-                style="@style/rule_layout_button"/>
+                style="@style/rule_layout_ruleButton"/>
 
             <Button
                 android:id="@+id/morning_floor_btn"
                 android:text="@string/morning_floor"
-                style="@style/rule_layout_button"/>
+                style="@style/rule_layout_ruleButton"/>
 
             <Button
                 android:id="@+id/morning_people_btn"
                 android:text="@string/morning_people"
-                style="@style/rule_layout_button"/>
+                style="@style/rule_layout_ruleButton"/>
 
             <Button
                 android:id="@+id/morning_start_position_btn"
                 android:text="@string/morning_start_position"
-                style="@style/rule_layout_button"/>
+                style="@style/rule_layout_ruleButton"/>
 
             <ImageView
                 style="@style/rule_layout_view"/>
@@ -59,22 +58,22 @@
             <Button
                 android:id="@+id/afternoon_days_btn"
                 android:text="@string/afternoon_days"
-                style="@style/rule_layout_button"/>
+                style="@style/rule_layout_ruleButton"/>
 
             <Button
                 android:id="@+id/afternoon_floor_btn"
                 android:text="@string/afternoon_floor"
-                style="@style/rule_layout_button"/>
+                style="@style/rule_layout_ruleButton"/>
 
             <Button
                 android:id="@+id/afternoon_people_btn"
                 android:text="@string/afternoon_people"
-                style="@style/rule_layout_button"/>
+                style="@style/rule_layout_ruleButton"/>
 
             <Button
                 android:id="@+id/afternoon_start_position_btn"
                 android:text="@string/afternoon_start_position"
-                style="@style/rule_layout_button"/>
+                style="@style/rule_layout_ruleButton"/>
 
             <ImageView
                 style="@style/rule_layout_view"/>
@@ -84,22 +83,22 @@
             <Button
                 android:id="@+id/night_days_btn"
                 android:text="@string/night_days"
-                style="@style/rule_layout_button"/>
+                style="@style/rule_layout_ruleButton"/>
 
             <Button
                 android:id="@+id/night_floor_btn"
                 android:text="@string/night_floor"
-                style="@style/rule_layout_button"/>
+                style="@style/rule_layout_ruleButton"/>
 
             <Button
                 android:id="@+id/night_people_btn"
                 android:text="@string/night_people"
-                style="@style/rule_layout_button"/>
+                style="@style/rule_layout_ruleButton"/>
 
             <Button
                 android:id="@+id/night_start_position_btn"
                 android:text="@string/night_start_position"
-                style="@style/rule_layout_button"/>
+                style="@style/rule_layout_ruleButton"/>
 
             <ImageView
                 style="@style/rule_layout_view"/>
@@ -109,22 +108,22 @@
             <Button
                 android:id="@+id/night_4_days_btn"
                 android:text="@string/night_4_days"
-                style="@style/rule_layout_button"/>
+                style="@style/rule_layout_ruleButton"/>
 
             <Button
                 android:id="@+id/night_4_floor_btn"
                 android:text="@string/night_4_floor"
-                style="@style/rule_layout_button"/>
+                style="@style/rule_layout_ruleButton"/>
 
             <Button
                 android:id="@+id/night_4_people_btn"
                 android:text="@string/night_4_people"
-                style="@style/rule_layout_button"/>
+                style="@style/rule_layout_ruleButton"/>
 
             <Button
                 android:id="@+id/night_4_start_position_btn"
                 android:text="@string/night_4_start_position"
-                style="@style/rule_layout_button"/>
+                style="@style/rule_layout_ruleButton"/>
 
             <!---其他设置-->
 
@@ -135,39 +134,32 @@
                 android:id="@+id/not_more_than_btn"
                 android:layout_marginBottom="10sp"
                 android:text="@string/not_more_than"
-                style="@style/rule_layout_button"/>
+                style="@style/rule_layout_ruleButton"/>
 
         </LinearLayout>
 
 
-
-
         <Button
+            style="@style/rule_layout_button"
             android:id="@+id/next_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:layout_below="@id/create_rule_layout"
-            android:layout_marginTop="15sp"
-            android:layout_marginStart="20sp"
             android:text="@string/next"/>
 
         <Button
+            style="@style/rule_layout_button"
             android:id="@+id/cancel_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15sp"
             android:layout_below="@id/create_rule_layout"
             android:layout_toEndOf="@id/next_btn"
             android:text="@string/cancel"/>
 
         <Button
+            style="@style/rule_layout_button"
             android:id="@+id/select_file_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15sp"
             android:layout_below="@id/create_rule_layout"
             android:layout_toEndOf="@id/cancel_btn"
+            android:padding="10sp"
             android:text="@string/use_save_rule_file"/>
+
         <RadioGroup
             android:id="@+id/save_file_btn_group"
             android:layout_width="wrap_content"
@@ -177,16 +169,10 @@
                 android:id="@+id/save_file_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="20sp"
+                android:layout_marginStart="5sp"
                 android:text="@string/save_change"/>
-
         </RadioGroup>
 
-
     </RelativeLayout>
-
-
-
-
 
 </ScrollView>

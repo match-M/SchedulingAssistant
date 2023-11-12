@@ -56,6 +56,7 @@
         <Button
             android:id="@+id/select_save_file_btn"
             style="@style/personnel_settings_layout_button"
+            android:padding="10sp"
             android:text="@string/select_save_file"/>
 
 
