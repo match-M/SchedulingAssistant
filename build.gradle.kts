@@ -2,3 +2,12 @@
 plugins {
     id("com.android.application") version "8.1.2" apply false
 }
+
+allprojects {
+    repositories {
+        google()
+        jcenter()
+        maven { url=uri("https://www.jitpack.io") }
+    }
+
+}

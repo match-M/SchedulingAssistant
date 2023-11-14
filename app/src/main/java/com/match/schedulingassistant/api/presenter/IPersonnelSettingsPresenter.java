@@ -44,4 +44,9 @@ public interface IPersonnelSettingsPresenter {
      * @param fileName 要使用文件的名字
      */
     void usingFile(String fileName);
+
+    /**
+     * 实现完成时的逻辑
+     */
+    void doFinish();
 }

@@ -10,7 +10,7 @@
     <string name="finish">完成</string>
     <string name="set_new_scheduling_rule">设置新排班的规则</string>
     <string name="create_new_rule">创建新的规则</string>
-    <string name="use_save_rule_file">使用已保存的规则文件</string>
+    <string name="use_save_rule_file">使用已保存的规则</string>
     <string name="select_rule">选择规则文件</string>
     <string name="morning_days">早读检查的天数</string>
     <string name="morning_floor">早读检查的楼层数</string>

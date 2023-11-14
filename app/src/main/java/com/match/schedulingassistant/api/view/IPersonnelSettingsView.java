@@ -3,6 +3,8 @@ package com.match.schedulingassistant.api.view;
 import android.view.View;
 import android.widget.ArrayAdapter;
 
+import com.match.schedulingassistant.scheduling.Scheduling;
+
 /**
  * @author match
  */
@@ -28,7 +30,7 @@ public interface IPersonnelSettingsView {
     /**
      * 完成
      */
-    void finish();
+    void finishAndGoNext(Scheduling scheduling);
 
     /**
      * 取消

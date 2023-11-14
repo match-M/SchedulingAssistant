@@ -19,6 +19,7 @@ import com.match.schedulingassistant.R;
 import com.match.schedulingassistant.api.presenter.IPersonnelSettingsPresenter;
 import com.match.schedulingassistant.api.view.IPersonnelSettingsView;
 import com.match.schedulingassistant.presenter.PersonnelSettingsPresenter;
+import com.match.schedulingassistant.scheduling.Scheduling;
 
 /**
  * 人员设置
@@ -74,9 +75,6 @@ public class PersonnelSettingsActivity extends Activity implements View.OnClickL
 
     }
 
-
-
-
     @Override
     public void onClick(View view) {
         int id = view.getId();
@@ -91,8 +89,7 @@ public class PersonnelSettingsActivity extends Activity implements View.OnClickL
         }
 
         if(id == R.id.finish_btn){
-            Toast.makeText(PersonnelSettingsActivity.this, "ok", Toast.LENGTH_SHORT).show();
-
+            iPersonnelSettingsPresenter.doFinish();
         }
 
         if(id == R.id.select_save_file_btn){
@@ -155,8 +152,14 @@ public class PersonnelSettingsActivity extends Activity implements View.OnClickL
     }
 
     @Override
-    public void finish(){
-
+    public void finishAndGoNext(Scheduling scheduling){
+        Bundle bundle = new Bundle();
+        Intent intent = new Intent(PersonnelSettingsActivity.this,
+                SchedulingTableActivity.class);
+        bundle.putSerializable("scheduling", scheduling);
+        intent.putExtras(bundle);
+        startActivity(intent);
+        finish(); //结束这个Activity
     }
 
     /**
@@ -164,6 +167,8 @@ public class PersonnelSettingsActivity extends Activity implements View.OnClickL
      */
     @Override
     public void cancel() {
-        startActivity(new Intent(PersonnelSettingsActivity.this, RuleSettingActivity.class));
+        startActivity(new Intent(PersonnelSettingsActivity.this,
+                RuleSettingActivity.class));
+        finish();
     }
 }

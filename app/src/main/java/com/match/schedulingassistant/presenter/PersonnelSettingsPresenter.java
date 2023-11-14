@@ -133,4 +133,12 @@ public class PersonnelSettingsPresenter implements IPersonnelSettingsPresenter {
         }
         this.upList();
     }
+
+    /**
+     * 实现完成时的逻辑
+     */
+    @Override
+    public void doFinish() {
+        iPersonnelSettingsView.finishAndGoNext(this.scheduling);
+    }
 }
